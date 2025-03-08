@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  serverExternalPackages: ['pdf2json'], // Add the AWS SDK Textract package to the Server Components external package
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '100mb', // Set the body size limit for Server Actions
+    },
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
