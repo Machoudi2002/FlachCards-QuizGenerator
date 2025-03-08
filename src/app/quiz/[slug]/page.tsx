@@ -3,7 +3,7 @@ import Navbar from "@/app/ui/Navbar";
 import QuizQuestion from "@/app/ui/QuizQuestion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 interface QuizQuestionProps {
   question: string;
@@ -17,16 +17,16 @@ interface QuizQuestionProps {
 
 const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
   const [quizKey, setQuizKey] = useState<string>("");
-    const [quiz, setQuiz] = useState<any>(null);
-    const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
-    const [submitted, setSubmitted] = useState<boolean>(false);
+  const [quiz, setQuiz] = useState<any>(null);
+  const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchParams = async () => {
-      const { slug } = await params;
+      const resolvedParams = await params;
+      const { slug } = resolvedParams;
       setQuizKey(decodeURIComponent(slug.split("-").join(" ")));
-      console.log(decodeURIComponent(slug.split("-").join(" "))); // Expected output: "My Quiz"
-    }
+    };
     fetchParams();
   }, [params]);
 
@@ -36,7 +36,6 @@ const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
       if (keyContent) {
         const parsedContent = JSON.parse(keyContent);
         setQuiz(parsedContent.quizData);
-        console.log(parsedContent.quizData) // Expected output: [{ question: "What is 1 + 1?", options: ["1", "2", "3", "4"], correct_answer: "2" }]
       }
     }
   }, [quizKey]);
@@ -55,10 +54,9 @@ const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
   return (
     <div>
       <Navbar />
-      
       <div className="flex flex-col items-center justify-center p-6 bg-white">
-      <h1 className="mt-8 text-3xl font-bold text-gray-800 mb-4">{quizKey}</h1>
-      {quiz && (
+        <h1 className="mt-8 text-3xl font-bold text-gray-800 mb-4">{quizKey}</h1>
+        {quiz && (
           <Card className="mt-8 w-full max-w-2xl">
             <CardContent className="p-6">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Quiz</h2>
