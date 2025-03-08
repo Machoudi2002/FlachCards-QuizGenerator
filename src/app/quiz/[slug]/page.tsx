@@ -15,7 +15,7 @@ interface QuizQuestionProps {
   submitted: boolean;
 }
 
-const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
+const Page: React.FC<{ params: Promise<{ slug: string }> }> = ({ params }) => {
   const [quizKey, setQuizKey] = useState<string>("");
   const [quiz, setQuiz] = useState<any>(null);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
