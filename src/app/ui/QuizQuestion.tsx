@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -40,7 +39,7 @@ export default function QuizQuestion({
           }}
           className="space-y-3"
         >
-          {options.map((option, optionIndex) => {
+          {options && options.map((option, optionIndex) => {
             const isOptionCorrect = option === correctAnswer;
             const isSelected = selectedAnswer === option;
 
